@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart'; // Add table_calendar package in pubspec.yaml
+import '89_reception_step4_createreservation.dart';
 
 class CreateReservationStep3Screen extends StatefulWidget {
   final Map<String, String> reservationDetails;
@@ -133,9 +134,13 @@ class CreateReservationStep3ScreenState extends State<CreateReservationStep3Scre
                       widget.reservationDetails['selectedDates'] = selectedDates.toString();
 
                       // Print updated map for debugging
-                      print(widget.reservationDetails);
+                      // print(widget.reservationDetails);
 
                       // Continue to the next page or process the reservation here
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CreateReservationStep4Screen(reservationDetails: widget.reservationDetails)),
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
