@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import '91_reception_step6_createreservation.dart';
 
 class CreateReservationStep5Screen extends StatefulWidget {
-  final Map<String, String> reservationDetails;
+  final Map<String, dynamic> reservationDetails;
 
   const CreateReservationStep5Screen({super.key, required this.reservationDetails});
 
@@ -126,5 +127,13 @@ class CreateReservationStep5ScreenState extends State<CreateReservationStep5Scre
   void _onNext() {
     // Navigate to the next step or perform additional actions
     // Replace with actual navigation or processing logic as needed
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CreateReservationStep6Screen(
+          reservationDetails: widget.reservationDetails,
+        ),
+      ),
+    );
   }
 }

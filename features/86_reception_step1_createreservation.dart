@@ -10,7 +10,7 @@ class CreateReservationScreen extends StatefulWidget {
 
 class CreateReservationScreenState extends State<CreateReservationScreen> {
   // Create a Map to store the input values
-  final Map<String, String> reservationDetails = {
+  final Map<String, dynamic> reservationDetails = {
     'name': '',
     'email': '',
     'phoneNumber': '',

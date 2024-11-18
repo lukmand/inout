@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '90_reception_step5_createreservation.dart';
 
 class CreateReservationStep4Screen extends StatefulWidget {
-  final Map<String, String> reservationDetails;
+  final Map<String, dynamic> reservationDetails;
 
   const CreateReservationStep4Screen({super.key, required this.reservationDetails});
 

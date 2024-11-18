@@ -3,7 +3,7 @@ import 'package:table_calendar/table_calendar.dart'; // Add table_calendar packa
 import '89_reception_step4_createreservation.dart';
 
 class CreateReservationStep3Screen extends StatefulWidget {
-  final Map<String, String> reservationDetails;
+  final Map<String, dynamic> reservationDetails;
 
   const CreateReservationStep3Screen({super.key, required this.reservationDetails});
 
@@ -62,9 +62,8 @@ class CreateReservationStep3ScreenState extends State<CreateReservationStep3Scre
           }
         });
 
-        // Reset selected date and time after adding
+        // Reset selected time only, allowing date to persist for multiple entries
         setState(() {
-          selectedDate = null;
           selectedTime = null;
         });
       }
@@ -77,7 +76,6 @@ class CreateReservationStep3ScreenState extends State<CreateReservationStep3Scre
       );
     }
   }
-
 
   void _showError(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -112,42 +110,41 @@ class CreateReservationStep3ScreenState extends State<CreateReservationStep3Scre
               _buildTimeSelection(),
               const SizedBox(height: 16),
               _buildSelectedDatesTable(),
-              const SizedBox(height: 32),
-              Center (
-                child: ElevatedButton(
-                  onPressed: _addSelectedDate,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                  ),
-                  child: const Text("Add Selected Date and Time"),
-                ),
-              ),
-
+              const SizedBox(height: 16), // Added space between buttons
               Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (selectedDates.isEmpty) {
-                      _showError(context);
-                    } else {
-                      // Update the map with selected dates and times
-                      widget.reservationDetails['selectedDates'] = selectedDates.toString();
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: _addSelectedDate,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      ),
+                      child: const Text("Add Selected Date and Time"),
+                    ),
+                    const SizedBox(height: 16), // Added space between the buttons
+                    ElevatedButton(
+                      onPressed: () {
+                        if (selectedDates.isEmpty) {
+                          _showError(context);
+                        } else {
+                          // Update the map with selected dates and times
+                          widget.reservationDetails['selectedDates'] = selectedDates;
 
-                      // Print updated map for debugging
-                      // print(widget.reservationDetails);
-
-                      // Continue to the next page or process the reservation here
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CreateReservationStep4Screen(reservationDetails: widget.reservationDetails)),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                  ),
-                  child: const Text('Next'),
+                          // Continue to the next page or process the reservation here
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CreateReservationStep4Screen(reservationDetails: widget.reservationDetails)),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      ),
+                      child: const Text('Next'),
+                    ),
+                  ],
                 ),
               ),
             ],

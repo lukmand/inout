@@ -3,7 +3,7 @@ import '88_reception_step3_createreservation.dart';
 
 class CreateReservationStep2Screen extends StatefulWidget {
   // Receive the previous map (reservationDetails) from Step 1
-  final Map<String, String> reservationDetails;
+  final Map<String, dynamic> reservationDetails;
 
   const CreateReservationStep2Screen({super.key, required this.reservationDetails});
 
